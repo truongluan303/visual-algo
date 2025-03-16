@@ -1,0 +1,7 @@
+#sorting-visualizing-panel {
+    position:fixed;
+    background-color: var(--dark);
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+}

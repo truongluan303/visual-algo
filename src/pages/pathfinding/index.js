@@ -1,0 +1,2 @@
+import PathfindingVisualizer from 'pages/pathfinding/components/PathfindingVisualizer'
+export default PathfindingVisualizer

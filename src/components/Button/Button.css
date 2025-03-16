@@ -1,0 +1,28 @@
+#button {
+    outline: 2px solid var(--light-blue);
+    color: var(--yellow);
+    background-color: var(--dark);
+    width: 140px;
+    margin-top: 10px;
+    padding: 5px 20px;
+    margin: 12px 15px 12px 20px;
+    border-radius: 15px;
+    border-width: 0;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 7px #fff, 0 0 15px var(--light-blue);
+}
+#button:disabled,
+#button[disabled] {
+    color: var(--gray);
+}
+#button:disabled:hover {
+    transform: none;
+    box-shadow: none;
+    cursor: not-allowed;
+}

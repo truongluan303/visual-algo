@@ -1,0 +1,13 @@
+:root {
+  --yellow: #f5b433;
+  --light-blue: #6392ac;
+  --dark: #1e1e1e;
+  --extra-dark: #050505;
+  --gray: #363636;
+  --light-gray: #aac8c8;
+  --green: rgb(60, 179, 113);
+}
+
+.App {
+  text-align: center;
+}
