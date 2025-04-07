@@ -8,8 +8,7 @@ import './SortingVisualizer.css'
 import SORT_OPTIONS from '../sortOptions'
 
 const HEADER_HEIGHT = 60
-const DEFAULT_ARR_SIZE = 1000
-const DEFAULT_SLEEP_TIME = 100
+const DEFAULT_ARR_SIZE = 50
 
 class SortingVisualizer extends React.Component {
   constructor () {
@@ -40,6 +39,11 @@ class SortingVisualizer extends React.Component {
         this.runSort()
       }
     }
+
+    // Upon array size change, generate a new array
+    if (oldState.arrSize !== this.state.arrSize) {
+      this.handleShuffle()
+    }
   }
 
   handleResize = () => {
@@ -57,13 +61,20 @@ class SortingVisualizer extends React.Component {
     this.setState({ arr: newarr, arrSorted: false, arrColorMapping: {} })
   }
 
+  calculateSleepTime = () => {
+    if (this.state.arrSize > 500) {
+      return 0
+    }
+    return (100000 / Math.pow(this.state.arrSize, 2))
+  }
+
   runSort = async () => {
     const setArr = arr => this.setState({ arr })
     const setColorMapping = colorMap => this.setState({ arrColorMapping: colorMap })
     const isStopped = () => !this.state.isRunning
     const createFinishEffect = async () => {
       const colorMap = {}
-      const sleeptime = (10000 / Math.pow(this.state.arrSize, 2))
+      const sleeptime = this.calculateSleepTime() / 3
       for (let i = 0; i < this.state.arrSize; i++) {
         colorMap[i] = 'var(--green)'
         this.setState({ arrColorMapping: colorMap })
@@ -87,7 +98,7 @@ class SortingVisualizer extends React.Component {
       default:
         console.error('Something went wrong!')
     }
-    await sortFunc(this.state.arr, DEFAULT_SLEEP_TIME, setArr, setColorMapping, isStopped)
+    await sortFunc(this.state.arr, this.calculateSleepTime(), setArr, setColorMapping, isStopped)
 
     // Create finishing effect if the array was completely sorted
     if (this.state.arr.every((value, idx, array) => idx === 0 || value >= array[idx - 1])) {
@@ -119,6 +130,8 @@ class SortingVisualizer extends React.Component {
                        isRunning={this.state.isRunning}
                        sorted={this.state.arrSorted}
                        onAlgoChange={(algo) => this.setState({ algo })}
+                       arraySize={this.state.arrSize}
+                       onSizeChange={() => this.setState({ arrSize: Number(event.target.value) })}
                        onShuffleClick={this.handleShuffle}
                        onRunClick={() => this.setState({ isRunning: !this.state.isRunning })} />
 
