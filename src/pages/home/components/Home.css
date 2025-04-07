@@ -1,0 +1,77 @@
+.home-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #659bdd, #9655db);
+    padding: 1rem;
+}
+
+.home-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgb(255, 227, 174);
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.home-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
+}
+
+.home-subtitle {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+}
+
+.home-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.home-button {
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: bold;;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.home-button.purple {
+    background-color: #5c468f;
+}
+
+.home-button.purple:hover {
+    background-color: #1f0946;
+}
+
+.home-button.blue {
+    background-color: #295398;
+}
+
+.home-button.blue:hover {
+    background-color: #0a1e49;
+}
+
+.home-socials {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 1.75rem;
+    color: #6b7280;
+}
+
+.home-socials a:hover {
+    color: black;
+    transition: color 0.3s ease;
+}

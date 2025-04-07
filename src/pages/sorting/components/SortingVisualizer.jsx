@@ -120,7 +120,7 @@ class SortingVisualizer extends React.Component {
                        sorted={this.state.arrSorted}
                        onAlgoChange={(algo) => this.setState({ algo })}
                        onShuffleClick={this.handleShuffle}
-                       onRunClick={this.setState({ isRunning: !this.state.isRunning })} />
+                       onRunClick={() => this.setState({ isRunning: !this.state.isRunning })} />
 
         <div id="sorting-visualizing-panel"
              style={panelStyle}>
