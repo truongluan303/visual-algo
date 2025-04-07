@@ -1,4 +1,4 @@
-import { sleep } from 'lib/utils'
+import { sleep } from '../../lib/utils'
 
 function swap (arr, i, j) {
   const tmp = arr[i]
