@@ -1,6 +1,7 @@
 import React from 'react'
 import SortingHeader from './Header'
 import Bar from './Bar'
+import Popup from 'components/Popup'
 import { bubbleSort, insertionSort, mergeSort, selectionSort } from 'pages/sorting/sort'
 import { sleep, getRandomInt } from 'lib/utils'
 
@@ -125,6 +126,10 @@ class SortingVisualizer extends React.Component {
     const barHeight = (val) => ((sortingPanelHeight - HEIGHT_OFFSET) * val) / this.state.arrSize
     return (
       <div>
+        <Popup title="⚠️ Screen Too Small"
+               message="This visualization works best on larger screens. For the best experience, consider resizing the windows or change device!"
+               breakpoint={750}
+               autoShowOnSmallScreen={true} />
         <SortingHeader height={`${HEADER_HEIGHT}px`}
                        isRunning={this.state.isRunning}
                        sorted={this.state.arrSorted}

@@ -38,12 +38,12 @@ class SortingHeader extends React.Component {
                 value="Shuffle"
                 disabled={this.props.isRunning}
                 height="35px"
-                width="130px" />
+                width="120px" />
         <Button onClick={this.props.onRunClick}
                 value={this.props.isRunning ? 'Stop' : 'Run'}
                 disabled={this.props.sorted}
                 height="35px"
-                width="130px" />
+                width="120px" />
       </header>
     )
   }
