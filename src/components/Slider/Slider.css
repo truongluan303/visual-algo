@@ -29,3 +29,10 @@ input[type='range']::-moz-range-thumb {
     cursor: pointer;
     border: none;
 }
+
+/* Add this to your CSS file or inline styles */
+input[type="range"]:disabled {
+    background-color: #e0e0e0; /* Gray background */
+    cursor: not-allowed;
+    opacity: 0.5;
+}

@@ -2,13 +2,14 @@ import React from 'react'
 import SortingHeader from './Header'
 import Bar from './Bar'
 import { bubbleSort, insertionSort, mergeSort, selectionSort } from 'pages/sorting/sort'
-import { sleep } from 'lib/utils'
+import { sleep, getRandomInt } from 'lib/utils'
 
 import './SortingVisualizer.css'
 import SORT_OPTIONS from '../sortOptions'
 
-const HEADER_HEIGHT = 60
+const HEADER_HEIGHT = 70
 const DEFAULT_ARR_SIZE = 50
+const DEFAULT_SPEED = 5
 
 class SortingVisualizer extends React.Component {
   constructor () {
@@ -17,6 +18,7 @@ class SortingVisualizer extends React.Component {
       arrSize: DEFAULT_ARR_SIZE,
       arr: this.createArr(DEFAULT_ARR_SIZE),
       arrColorMapping: {},
+      speed: DEFAULT_SPEED,
       arrSorted: false,
       isRunning: false,
       algo: SORT_OPTIONS[0].value,
@@ -62,10 +64,7 @@ class SortingVisualizer extends React.Component {
   }
 
   calculateSleepTime = () => {
-    if (this.state.arrSize > 500) {
-      return 0
-    }
-    return (100000 / Math.pow(this.state.arrSize, 2))
+    return ((25 - this.state.speed) * 10000 / Math.pow(this.state.arrSize, 2))
   }
 
   runSort = async () => {
@@ -98,7 +97,7 @@ class SortingVisualizer extends React.Component {
       default:
         console.error('Something went wrong!')
     }
-    await sortFunc(this.state.arr, this.calculateSleepTime(), setArr, setColorMapping, isStopped)
+    await sortFunc(this.state.arr, this.calculateSleepTime, setArr, setColorMapping, isStopped)
 
     // Create finishing effect if the array was completely sorted
     if (this.state.arr.every((value, idx, array) => idx === 0 || value >= array[idx - 1])) {
@@ -131,13 +130,15 @@ class SortingVisualizer extends React.Component {
                        sorted={this.state.arrSorted}
                        onAlgoChange={(algo) => this.setState({ algo })}
                        arraySize={this.state.arrSize}
-                       onSizeChange={() => this.setState({ arrSize: Number(event.target.value) })}
+                       onSizeChange={(e) => this.setState({ arrSize: Number(e.target.value) })}
+                       speed={this.state.speed}
+                       onSpeedChange={(e) => this.setState({ speed: Number(e.target.value) })}
                        onShuffleClick={this.handleShuffle}
                        onRunClick={() => this.setState({ isRunning: !this.state.isRunning })} />
 
         <div id="sorting-visualizing-panel"
              style={panelStyle}>
-            {this.state.arr.map((val, idx) => <Bar key={val}
+            {this.state.arr.map((val, idx) => <Bar key={`${val}-${getRandomInt(0, 1000000)}`}
                                                    width={barWidth}
                                                    height={barHeight(val)}
                                                    color={this.state.arrColorMapping[idx]}/>)}

@@ -16,7 +16,6 @@ class SortingHeader extends React.Component {
   render () {
     return (
       <header id="header" height={this.props.height} >
-        <h1>VisualAlgo</h1>
         <Dropdown label="Algorithm"
                   width="150px"
                   options={SORT_OPTIONS}
@@ -25,8 +24,16 @@ class SortingHeader extends React.Component {
                 min={15}
                 max={1000}
                 value={this.props.arraySize}
+                disabled={this.props.isRunning}
                 displayValue={String(this.props.arraySize)}
                 onChange={this.props.onSizeChange} />
+        <Slider label="Speed"
+                min={1}
+                max={25}
+                value={this.props.speed}
+                disabled={false}
+                displayValue=""
+                onChange={this.props.onSpeedChange} />
         <Button onClick={this.props.onShuffleClick}
                 value="Shuffle"
                 disabled={this.props.isRunning}
@@ -48,6 +55,8 @@ SortingHeader.propTypes = {
   arraySize: PropTypes.number.isRequired,
   onAlgoChange: PropTypes.func.isRequired,
   onSizeChange: PropTypes.func.isRequired,
+  speed: PropTypes.number.isRequired,
+  onSpeedChange: PropTypes.func.isRequired,
   onShuffleClick: PropTypes.func.isRequired,
   onRunClick: PropTypes.func.isRequired,
   isRunning: PropTypes.bool.isRequired

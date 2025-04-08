@@ -10,20 +10,26 @@ class Slider extends React.Component {
   }
 
   render () {
-    const { label, min, max, value, displayValue, onChange } = this.props
+    const { label, min, max, value, disabled, displayValue, onChange } = this.props
 
     return (
       <div className="w-full flex flex-col gap-2">
         <label className="text-gray-700 font-medium">
-          {label}: <span className="font-bold">{displayValue}</span>
+          {label} <span className="font-bold">{displayValue}</span>
         </label>
         <input
           type="range"
           min={min}
           max={max}
           value={value}
+          disabled={disabled}
           onChange={onChange}
-          className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+          className={`
+            w-full h-2 bg-blue-400 rounded-lg appearance-none cursor-pointer
+            disabled:bg-gray-300
+            disabled:cursor-not-allowed
+            transition
+          `}
         />
       </div>
     )
@@ -35,6 +41,7 @@ Slider.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
+  disabled: PropTypes.bool.isRequired,
   displayValue: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 }
