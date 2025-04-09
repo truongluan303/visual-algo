@@ -19,7 +19,8 @@ class SortingHeader extends React.Component {
         <Dropdown label="Algorithm"
                   width="150px"
                   options={SORT_OPTIONS}
-                  onSelect={this.props.onAlgoChange} />
+                  onSelect={this.props.onAlgoChange}
+                  disabled={this.props.isRunning} />
         <Slider label="Array Size"
                 min={15}
                 max={1000}

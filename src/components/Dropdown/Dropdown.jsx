@@ -19,7 +19,10 @@ class Dropdown extends React.Component {
     return (
       <div id="container">
         <label id="label"> {this.props.label} </label>
-        <select id="dropdown"
+        <select
+          id="dropdown"
+          className={this.props.disabled ? '' : 'dropdown-enabled'}
+          disabled={this.props.disabled}
           onChange={this.onChangeEvent}
           style={{ width: this.props.width }} >
           {this.props.options.map(({ value, label }) =>
@@ -34,7 +37,8 @@ Dropdown.propTypes = {
   width: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
-  onSelect: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired
 }
 
 export default Dropdown

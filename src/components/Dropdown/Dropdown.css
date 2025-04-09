@@ -21,10 +21,10 @@
     height: 25px;
     padding: 0 7px;
     transition: 0.5s;
-    cursor: pointer;
 }
 
-#dropdown:hover {
+.dropdown-enabled:hover {
+    cursor: pointer;
     transform: scale(1.05);
     box-shadow: 0 0 5px #fff, 0 0 13px var(--light-blue);
 }

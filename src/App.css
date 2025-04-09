@@ -1,12 +1,13 @@
 :root {
   --yellow: #f5b433;
-  --light-blue: #6392ac;
-  --blue: #2f81ad;
+  --light-blue: #90bbe1;
+  --blue: #598ec7;
+  --dark-red: rgb(82, 82, 82);
   --dark: #1e1e1e;
   --extra-dark: #050505;
   --gray: #363636;
   --light-gray: #aac8c8;
-  --green: rgb(60, 179, 113);
+  --green: rgb(80, 195, 51);
 }
 
 .App {
