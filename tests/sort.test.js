@@ -19,20 +19,20 @@ const mockCheckIsStopped = () => false
 
 describe('Test bubble sort', () => {
   it('should sort an array of numbers', async () => {
-    var arr = shuffleArray(generateArray(100))
+    const arr = shuffleArray(generateArray(100))
     const expectedArr = [...arr].sort((a, b) => a - b)
     await bubbleSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual(expectedArr)
   })
 
   it('should handle an already sorted array', async () => {
-    var arr = [1, 2, 3, 4, 5]
+    const arr = [1, 2, 3, 4, 5]
     await bubbleSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([1, 2, 3, 4, 5])
   })
 
   it('should handle an empty array', () => {
-    var arr = []
+    const arr = []
     bubbleSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([])
   })
@@ -40,20 +40,20 @@ describe('Test bubble sort', () => {
 
 describe('Test insertion sort', () => {
   it('should sort an array of numbers', async () => {
-    var arr = shuffleArray(generateArray(100))
+    const arr = shuffleArray(generateArray(100))
     const expectedArr = [...arr].sort((a, b) => a - b)
     await insertionSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual(expectedArr)
   })
 
   it('should handle an already sorted array', async () => {
-    var arr = [1, 2, 3, 4, 5]
+    const arr = [1, 2, 3, 4, 5]
     await insertionSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([1, 2, 3, 4, 5])
   })
 
   it('should handle an empty array', () => {
-    var arr = []
+    const arr = []
     insertionSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([])
   })
@@ -61,20 +61,20 @@ describe('Test insertion sort', () => {
 
 describe('Test selection sort', () => {
   it('should sort an array of numbers', async () => {
-    var arr = shuffleArray(generateArray(100))
+    const arr = shuffleArray(generateArray(100))
     const expectedArr = [...arr].sort((a, b) => a - b)
     await selectionSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual(expectedArr)
   })
 
   it('should handle an already sorted array', async () => {
-    var arr = [1, 2, 3, 4, 5]
+    const arr = [1, 2, 3, 4, 5]
     await selectionSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([1, 2, 3, 4, 5])
   })
 
   it('should handle an empty array', () => {
-    var arr = []
+    const arr = []
     selectionSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([])
   })
@@ -82,20 +82,20 @@ describe('Test selection sort', () => {
 
 describe('Test merge sort', () => {
   it('should sort an array of numbers', async () => {
-    var arr = shuffleArray(generateArray(100))
+    const arr = shuffleArray(generateArray(100))
     const expectedArr = [...arr].sort((a, b) => a - b)
     await mergeSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual(expectedArr)
   })
 
   it('should handle an already sorted array', async () => {
-    var arr = [1, 2, 3, 4, 5]
+    const arr = [1, 2, 3, 4, 5]
     await mergeSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([1, 2, 3, 4, 5])
   })
 
   it('should handle an empty array', () => {
-    var arr = []
+    const arr = []
     mergeSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([])
   })
