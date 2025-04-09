@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './Header.css'
 import Dropdown from 'components/Dropdown'
 import Button from 'components/Button'
 import PATHFINDING_OPTIONS from 'pages/pathfinding/pathfindingOptions'
