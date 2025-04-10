@@ -153,4 +153,99 @@ async function mergeSortRec (arr, lidx, ridx, getSleepTime, setArr, setColorMapp
   setColorMapping({})
 }
 
-export { bubbleSort, insertionSort, mergeSort, selectionSort }
+async function quickSort (arr, getSleepTime, setArr, setColorMapping, checkIsStopped) {
+  await quickSortRec(
+    arr, 0, arr.length - 1, getSleepTime, setArr, setColorMapping, checkIsStopped
+  )
+}
+
+async function quickSortRec (
+  arr, beginIdx, endIdx, getSleepTime, setArr, setColorMapping, checkIsStopped
+) {
+  if (beginIdx >= endIdx) {
+    return
+  }
+
+  const colorMap = {}
+  for (let i = beginIdx; i < endIdx; i++) {
+    colorMap[i] = 'var(--blue)'
+  }
+
+  const pivot = arr[endIdx]
+  let j = beginIdx - 1
+
+  for (let i = beginIdx; i < endIdx; i++) {
+    if (checkIsStopped()) {
+      return
+    }
+    if (arr[i] < pivot) {
+      j++
+      const tmp = arr[i]
+      arr[i] = arr[j]
+      arr[j] = tmp
+    }
+    setColorMapping({ ...colorMap, [endIdx]: 'red', [i]: 'var(--yellow)', [j]: 'purple' })
+    setArr(arr)
+    await sleep(getSleepTime())
+  }
+  arr[endIdx] = arr[j + 1]
+  arr[j + 1] = pivot
+  const pivotIdx = j + 1
+  setArr(arr)
+
+  await quickSortRec(
+    arr, pivotIdx + 1, endIdx, getSleepTime, setArr, setColorMapping, checkIsStopped
+  )
+  await quickSortRec(
+    arr, beginIdx, pivotIdx - 1, getSleepTime, setArr, setColorMapping, checkIsStopped
+  )
+}
+
+async function heapSort (arr, getSleepTime, setArr, setColorMapping, checkIsStopped) {
+  for (let i = Math.floor(arr.length / 2) - 1; i >= 0; i--) {
+    await heapify(arr, arr.length, i, getSleepTime, setArr, setColorMapping, checkIsStopped)
+  }
+
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (checkIsStopped()) {
+      return
+    }
+    const tmp = arr[0]
+    arr[0] = arr[i]
+    arr[i] = tmp
+
+    setArr(arr)
+    setColorMapping({ 0: 'var(--yellow)', [i]: 'purple' })
+    await sleep(getSleepTime())
+    await heapify(arr, i, 0, getSleepTime, setArr, setColorMapping, checkIsStopped)
+  }
+}
+
+async function heapify (arr, size, idx, getSleepTime, setArr, setColorMapping, checkIsStopped) {
+  if (checkIsStopped()) {
+    return
+  }
+  let maxIdx = idx
+  const lidx = idx * 2 + 1
+  const ridx = idx * 2 + 2
+
+  if (lidx < size && arr[lidx] > arr[maxIdx]) {
+    maxIdx = lidx
+  }
+  if (ridx < size && arr[ridx] > arr[maxIdx]) {
+    maxIdx = ridx
+  }
+
+  if (maxIdx !== idx) {
+    const tmp = arr[idx]
+    arr[idx] = arr[maxIdx]
+    arr[maxIdx] = tmp
+
+    setArr(arr)
+    setColorMapping({ [idx]: 'var(--yellow)', [maxIdx]: 'purple' })
+    await sleep(getSleepTime())
+    await heapify(arr, size, maxIdx, getSleepTime, setArr, setColorMapping, checkIsStopped)
+  }
+}
+
+export { bubbleSort, insertionSort, mergeSort, selectionSort, quickSort, heapSort }

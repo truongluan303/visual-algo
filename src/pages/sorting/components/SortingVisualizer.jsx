@@ -2,7 +2,7 @@ import React from 'react'
 import SortingHeader from './Header'
 import Bar from './Bar'
 import Popup from 'components/Popup'
-import { bubbleSort, insertionSort, mergeSort, selectionSort } from 'pages/sorting/sort'
+import { bubbleSort, heapSort, insertionSort, mergeSort, quickSort, selectionSort } from 'pages/sorting/sort'
 import { sleep, getRandomInt } from 'lib/utils'
 
 import './SortingVisualizer.css'
@@ -86,11 +86,17 @@ class SortingVisualizer extends React.Component {
       case 'bubble':
         sortFunc = bubbleSort
         break
+      case 'heap':
+        sortFunc = heapSort
+        break
       case 'insertion':
         sortFunc = insertionSort
         break
       case 'merge':
         sortFunc = mergeSort
+        break
+      case 'quick':
+        sortFunc = quickSort
         break
       case 'selection':
         sortFunc = selectionSort

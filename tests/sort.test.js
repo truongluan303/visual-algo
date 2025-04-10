@@ -1,4 +1,4 @@
-import { bubbleSort, insertionSort, mergeSort, selectionSort } from '../src/pages/sorting/sort.js'
+import { bubbleSort, heapSort, insertionSort, mergeSort, quickSort, selectionSort } from '../src/pages/sorting/sort.js'
 
 const generateArray = (size) => Array.from(Array(size).keys(), (key) => key + 1)
 
@@ -31,9 +31,9 @@ describe('Test bubble sort', () => {
     expect(arr).toEqual([1, 2, 3, 4, 5])
   })
 
-  it('should handle an empty array', () => {
+  it('should handle an empty array', async () => {
     const arr = []
-    bubbleSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+    await bubbleSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([])
   })
 })
@@ -52,9 +52,9 @@ describe('Test insertion sort', () => {
     expect(arr).toEqual([1, 2, 3, 4, 5])
   })
 
-  it('should handle an empty array', () => {
+  it('should handle an empty array', async () => {
     const arr = []
-    insertionSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+    await insertionSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([])
   })
 })
@@ -73,9 +73,9 @@ describe('Test selection sort', () => {
     expect(arr).toEqual([1, 2, 3, 4, 5])
   })
 
-  it('should handle an empty array', () => {
+  it('should handle an empty array', async () => {
     const arr = []
-    selectionSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+    await selectionSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([])
   })
 })
@@ -94,9 +94,51 @@ describe('Test merge sort', () => {
     expect(arr).toEqual([1, 2, 3, 4, 5])
   })
 
-  it('should handle an empty array', () => {
+  it('should handle an empty array', async () => {
     const arr = []
-    mergeSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+    await mergeSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+    expect(arr).toEqual([])
+  })
+})
+
+describe('Test quick sort', () => {
+  it('should sort an array of numbers', async () => {
+    const arr = shuffleArray(generateArray(100))
+    const expectedArr = [...arr].sort((a, b) => a - b)
+    await quickSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+    expect(arr).toEqual(expectedArr)
+  })
+
+  it('should handle an already sorted array', async () => {
+    const arr = [1, 2, 3, 4, 5]
+    await quickSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+    expect(arr).toEqual([1, 2, 3, 4, 5])
+  })
+
+  it('should handle an empty array', async () => {
+    const arr = []
+    await quickSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+    expect(arr).toEqual([])
+  })
+})
+
+describe('Test heap sort', () => {
+  it('should sort an array of numbers', async () => {
+    const arr = shuffleArray(generateArray(100))
+    const expectedArr = [...arr].sort((a, b) => a - b)
+    await heapSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+    expect(arr).toEqual(expectedArr)
+  })
+
+  it('should handle an already sorted array', async () => {
+    const arr = [1, 2, 3, 4, 5]
+    await heapSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+    expect(arr).toEqual([1, 2, 3, 4, 5])
+  })
+
+  it('should handle an empty array', async () => {
+    const arr = []
+    await heapSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
     expect(arr).toEqual([])
   })
 })
