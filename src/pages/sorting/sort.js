@@ -256,4 +256,38 @@ async function heapify (arr, size, idx, getSleepTime, setArr, setColorMapping, c
   }
 }
 
-export { bubbleSort, insertionSort, mergeSort, selectionSort, quickSort, heapSort }
+async function shellSort (arr, getSleepTime, setArr, setColorMapping, checkIsStopped) {
+  let interval = arr.length
+
+  while (interval > 0) {
+    interval = Math.floor(interval / 2)
+
+    for (let i = interval; i < arr.length; i++) {
+      if (checkIsStopped()) {
+        return
+      }
+      let stop = false
+      const tmp = arr[i]
+      let j
+
+      for (j = i; j >= interval && arr[j - interval] > tmp; j -= interval) {
+        if (checkIsStopped()) {
+          stop = true
+        }
+        arr[j] = arr[j - interval]
+        if (!stop) {
+          setArr(arr)
+          setColorMapping({ [i]: 'var(--yellow)', [j]: 'purple' })
+          await sleep(getSleepTime())
+        }
+      }
+      arr[j] = tmp
+      setArr(arr)
+      if (stop) {
+        return
+      }
+    }
+  }
+}
+
+export { bubbleSort, insertionSort, mergeSort, selectionSort, quickSort, heapSort, shellSort }

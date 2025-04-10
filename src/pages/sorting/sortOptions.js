@@ -4,7 +4,8 @@ const SORT_OPTIONS = [
   { value: 'insertion', label: 'Insertion Sort' },
   { value: 'merge', label: 'Merge Sort' },
   { value: 'quick', label: 'Quick Sort' },
-  { value: 'selection', label: 'Selection Sort' }
+  { value: 'selection', label: 'Selection Sort' },
+  { value: 'shell', label: 'Shell Sort' }
 ]
 
 export default SORT_OPTIONS

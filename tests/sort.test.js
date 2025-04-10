@@ -4,7 +4,8 @@ import {
   insertionSort,
   mergeSort,
   quickSort,
-  selectionSort
+  selectionSort,
+  shellSort
 } from '../src/pages/sorting/sort.js'
 
 const generateArray = (size) => Array.from(Array(size).keys(), (key) => key + 1)
@@ -32,6 +33,7 @@ const sortingAlgorithms = {
   'selection sort': selectionSort,
   'merge sort': mergeSort,
   'quick sort': quickSort,
+  'shell sort': shellSort,
   'heap sort': heapSort
 }
 

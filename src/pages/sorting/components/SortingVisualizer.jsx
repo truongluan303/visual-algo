@@ -2,7 +2,7 @@ import React from 'react'
 import SortingHeader from './Header'
 import Bar from './Bar'
 import Popup from 'components/Popup'
-import { bubbleSort, heapSort, insertionSort, mergeSort, quickSort, selectionSort } from 'pages/sorting/sort'
+import { bubbleSort, heapSort, insertionSort, mergeSort, quickSort, selectionSort, shellSort } from 'pages/sorting/sort'
 import { sleep, getRandomInt } from 'lib/utils'
 
 import './SortingVisualizer.css'
@@ -78,7 +78,9 @@ class SortingVisualizer extends React.Component {
       for (let i = 0; i < this.state.arrSize; i++) {
         colorMap[i] = 'var(--green)'
         this.setState({ arrColorMapping: colorMap })
-        await sleep(sleeptime)
+        if (this.state.arrSize < 500) {
+          await sleep(sleeptime)
+        }
       }
     }
     let sortFunc
@@ -100,6 +102,9 @@ class SortingVisualizer extends React.Component {
         break
       case 'selection':
         sortFunc = selectionSort
+        break
+      case 'shell':
+        sortFunc = shellSort
         break
       default:
         console.error('Something went wrong!')
