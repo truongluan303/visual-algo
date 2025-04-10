@@ -1,4 +1,11 @@
-import { bubbleSort, heapSort, insertionSort, mergeSort, quickSort, selectionSort } from '../src/pages/sorting/sort.js'
+import {
+  bubbleSort,
+  heapSort,
+  insertionSort,
+  mergeSort,
+  quickSort,
+  selectionSort
+} from '../src/pages/sorting/sort.js'
 
 const generateArray = (size) => Array.from(Array(size).keys(), (key) => key + 1)
 
@@ -12,133 +19,51 @@ const shuffleArray = (arr) => {
   return arr
 }
 
+// Mocks
 const mockGetSleepTime = () => 0
 const mockSetArr = (_) => {}
 const mockSetColorMapping = (_) => {}
 const mockCheckIsStopped = () => false
 
-describe('Test bubble sort', () => {
-  it('should sort an array of numbers', async () => {
-    const arr = shuffleArray(generateArray(100))
-    const expectedArr = [...arr].sort((a, b) => a - b)
-    await bubbleSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual(expectedArr)
-  })
+// Mapping of algorithm name to its function
+const sortingAlgorithms = {
+  'bubble sort': bubbleSort,
+  'insertion sort': insertionSort,
+  'selection sort': selectionSort,
+  'merge sort': mergeSort,
+  'quick sort': quickSort,
+  'heap sort': heapSort
+}
 
-  it('should handle an already sorted array', async () => {
-    const arr = [1, 2, 3, 4, 5]
-    await bubbleSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([1, 2, 3, 4, 5])
-  })
+const runSort = async (sortFn, arr) => {
+  await sortFn(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
+}
 
-  it('should handle an empty array', async () => {
-    const arr = []
-    await bubbleSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([])
-  })
-})
+// Run shared tests
+const runCommonSortTests = (sortName, sortFn) => {
+  describe(`Test ${sortName}`, () => {
+    it('should sort an array of numbers', async () => {
+      const arr = shuffleArray(generateArray(100))
+      const expectedArr = [...arr].sort((a, b) => a - b)
+      await runSort(sortFn, arr)
+      expect(arr).toEqual(expectedArr)
+    })
 
-describe('Test insertion sort', () => {
-  it('should sort an array of numbers', async () => {
-    const arr = shuffleArray(generateArray(100))
-    const expectedArr = [...arr].sort((a, b) => a - b)
-    await insertionSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual(expectedArr)
-  })
+    it('should handle an already sorted array', async () => {
+      const arr = [1, 2, 3, 4, 5]
+      await runSort(sortFn, arr)
+      expect(arr).toEqual([1, 2, 3, 4, 5])
+    })
 
-  it('should handle an already sorted array', async () => {
-    const arr = [1, 2, 3, 4, 5]
-    await insertionSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([1, 2, 3, 4, 5])
+    it('should handle an empty array', async () => {
+      const arr = []
+      await runSort(sortFn, arr)
+      expect(arr).toEqual([])
+    })
   })
+}
 
-  it('should handle an empty array', async () => {
-    const arr = []
-    await insertionSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([])
-  })
-})
-
-describe('Test selection sort', () => {
-  it('should sort an array of numbers', async () => {
-    const arr = shuffleArray(generateArray(100))
-    const expectedArr = [...arr].sort((a, b) => a - b)
-    await selectionSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual(expectedArr)
-  })
-
-  it('should handle an already sorted array', async () => {
-    const arr = [1, 2, 3, 4, 5]
-    await selectionSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([1, 2, 3, 4, 5])
-  })
-
-  it('should handle an empty array', async () => {
-    const arr = []
-    await selectionSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([])
-  })
-})
-
-describe('Test merge sort', () => {
-  it('should sort an array of numbers', async () => {
-    const arr = shuffleArray(generateArray(100))
-    const expectedArr = [...arr].sort((a, b) => a - b)
-    await mergeSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual(expectedArr)
-  })
-
-  it('should handle an already sorted array', async () => {
-    const arr = [1, 2, 3, 4, 5]
-    await mergeSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([1, 2, 3, 4, 5])
-  })
-
-  it('should handle an empty array', async () => {
-    const arr = []
-    await mergeSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([])
-  })
-})
-
-describe('Test quick sort', () => {
-  it('should sort an array of numbers', async () => {
-    const arr = shuffleArray(generateArray(100))
-    const expectedArr = [...arr].sort((a, b) => a - b)
-    await quickSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual(expectedArr)
-  })
-
-  it('should handle an already sorted array', async () => {
-    const arr = [1, 2, 3, 4, 5]
-    await quickSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([1, 2, 3, 4, 5])
-  })
-
-  it('should handle an empty array', async () => {
-    const arr = []
-    await quickSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([])
-  })
-})
-
-describe('Test heap sort', () => {
-  it('should sort an array of numbers', async () => {
-    const arr = shuffleArray(generateArray(100))
-    const expectedArr = [...arr].sort((a, b) => a - b)
-    await heapSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual(expectedArr)
-  })
-
-  it('should handle an already sorted array', async () => {
-    const arr = [1, 2, 3, 4, 5]
-    await heapSort(arr, mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([1, 2, 3, 4, 5])
-  })
-
-  it('should handle an empty array', async () => {
-    const arr = []
-    await heapSort([], mockGetSleepTime, mockSetArr, mockSetColorMapping, mockCheckIsStopped)
-    expect(arr).toEqual([])
-  })
-})
+// Loop over all algorithms and generate their tests
+for (const [name, fn] of Object.entries(sortingAlgorithms)) {
+  runCommonSortTests(name, fn)
+}
