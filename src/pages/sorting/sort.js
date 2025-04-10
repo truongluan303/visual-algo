@@ -139,17 +139,25 @@ async function mergeSortRec (arr, lidx, ridx, getSleepTime, setArr, setColorMapp
     }
   }
 
+  let stop = false
   for (let i = 0; i < tmp.length; i++) {
     arr[lidx + i] = tmp[i]
-    setColorMapping({ ...colorMap, [lidx + i]: 'var(--yellow)', [tmpIdxToArrIdx[i]]: 'purple' })
-    setArr(arr)
-    await sleep(getSleepTime())
+    // if the user hits stop when we are putting the tmp array elements into the
+    // original array, make sure we finish what we do before breaking out of the
+    // loop to avoid messing up the original array
+    if (!stop) {
+      setColorMapping({ ...colorMap, [lidx + i]: 'var(--yellow)', [tmpIdxToArrIdx[i]]: 'purple' })
+      setArr(arr)
+      await sleep(getSleepTime())
+    }
     if (checkIsStopped()) {
       setColorMapping({})
-      return
+      stop = true
     }
   }
-
+  if (stop) {
+    return
+  }
   setColorMapping({})
 }
 
